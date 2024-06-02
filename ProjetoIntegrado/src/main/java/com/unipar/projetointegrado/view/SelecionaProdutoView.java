@@ -5,16 +5,21 @@
 package com.unipar.projetointegrado.view;
 
 import com.unipar.projetointegrado.apiinterfaces.ProdutoAPI;
+import com.unipar.projetointegrado.util.PassarProduto;
 import java.util.List;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentListener;
 import models.Produto;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -25,8 +30,12 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
     /**
      * Creates new form SelecionaProdutoView
      */
+    TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>();
+    PassarProduto passarProduto = new PassarProduto();
+
     public SelecionaProdutoView() {
         initComponents();
+        tbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://localhost:8080")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -43,9 +52,9 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
                     List<Produto> produtos = response.body();
                     SwingUtilities.invokeLater(() -> {
                         for (Produto produto : produtos) {
-                            tableModel.addRow(new Object[]{produto.getId(), produto.getDescricao(),"R$ " + produto.getPreco(), produto.getCategoria()});
+                            tableModel.addRow(new Object[]{produto.getId(), produto.getDescricao(), produto.getPreco(), produto.getCategoria()});
                         }
-                        jTable1.setModel(tableModel);
+                        tbProdutos.setModel(tableModel);
                     });
                 } else {
                     System.err.println("Erro na resposta: " + response.errorBody());
@@ -73,7 +82,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btProcurar = new javax.swing.JButton();
         jPanel8 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
@@ -81,7 +90,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
         btCancelar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tbProdutos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,8 +104,8 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
         jTextField3.setBackground(new java.awt.Color(204, 204, 204));
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
 
-        jButton1.setBackground(new java.awt.Color(204, 204, 204));
-        jButton1.setIcon(new javax.swing.JLabel() {
+        btProcurar.setBackground(new java.awt.Color(204, 204, 204));
+        btProcurar.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
                 try {
                     return new javax.swing.ImageIcon(
@@ -107,10 +116,15 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
                 return null;
             }
         }.getIcon());
-        jButton1.setLabel("Procurar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btProcurar.setLabel("Procurar");
+        btProcurar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btProcurarMouseClicked(evt);
+            }
+        });
+        btProcurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btProcurarActionPerformed(evt);
             }
         });
 
@@ -124,7 +138,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 499, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -132,7 +146,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(btProcurar, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jTextField3)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -207,7 +221,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tbProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -215,7 +229,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tbProdutos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -285,17 +299,49 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btSelecionarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionarProdutoActionPerformed
-        // TODO add your handling code here:
+        int linha = tbProdutos.getSelectedRow();
+
+        if (!tbProdutos.getSelectionModel().isSelectionEmpty()) {
+            for (int i = 0; i < tbProdutos.getColumnCount(); i++) {
+                if (i == 0) {
+                    passarProduto.id = (Long.parseLong(tbProdutos.getValueAt(linha, i).toString()));
+                }
+                if (i == 1) {
+                    passarProduto.descricao = (tbProdutos.getValueAt(linha, i).toString());
+                }
+                if (i == 2) {
+                    passarProduto.preco = Double.parseDouble(tbProdutos.getValueAt(linha, i).toString());
+                }
+                if (i == 3) {
+                    passarProduto.categoria = (tbProdutos.getValueAt(linha, i).toString());
+                }
+            }
+
+            this.dispose();
+
+        }
+
     }//GEN-LAST:event_btSelecionarProdutoActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
         this.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btProcurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btProcurarActionPerformed
 
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btProcurarActionPerformed
+
+    private void btProcurarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btProcurarMouseClicked
+
+        String text = jTextField3.getText();
+        if (text.trim().length() == 0) {
+            rowSorter.setRowFilter(null);
+        } else {
+            rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+        }
+
+    }//GEN-LAST:event_btProcurarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -334,8 +380,8 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btCancelar;
+    private javax.swing.JButton btProcurar;
     private javax.swing.JButton btSelecionarProduto;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -344,7 +390,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tbProdutos;
     // End of variables declaration//GEN-END:variables
 }

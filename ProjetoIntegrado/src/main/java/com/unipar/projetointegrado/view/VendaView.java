@@ -5,6 +5,8 @@
 package com.unipar.projetointegrado.view;
 
 import com.unipar.projetointegrado.util.PassarCliente;
+import com.unipar.projetointegrado.util.PassarProduto;
+import javax.swing.table.DefaultTableModel;
 import models.Cliente;
 
 /**
@@ -16,10 +18,15 @@ public class VendaView extends javax.swing.JFrame {
     /**
      * Creates new form VendaView
      */
+    private String quantidadeProduto;
+    private Double valorTotal = 0.0;
     PassarCliente clientePassado = new PassarCliente();
+    PassarProduto produtoPassado = new PassarProduto();
+    DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Valor unit", "Qtd", "Valor total"}, 0);
 
     public VendaView() {
         initComponents();
+        tbProdutos.setModel(defaultTableModel);
     }
 
     /**
@@ -44,13 +51,13 @@ public class VendaView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCod = new javax.swing.JTextField();
         txtDescricao = new javax.swing.JTextField();
-        txtQtd = new javax.swing.JTextField();
         btAddProduto = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btRemoverProduto = new javax.swing.JButton();
         btSelecionaProduto = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        txtQuantidade = new java.awt.TextField();
         jPanel1 = new javax.swing.JPanel();
         btCadastrarProduto = new javax.swing.JButton();
         btCadastrarCliente = new javax.swing.JButton();
@@ -233,12 +240,6 @@ public class VendaView extends javax.swing.JFrame {
         txtDescricao.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtDescricao.setEnabled(false);
 
-        txtQtd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txtQtd.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtQtd.setText("1");
-        txtQtd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtQtd.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-
         btAddProduto.setBackground(new java.awt.Color(0, 102, 0));
         btAddProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btAddProduto.setForeground(new java.awt.Color(255, 255, 255));
@@ -310,23 +311,24 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btFinalizaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
-                        .addComponent(btLimpaVenda, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE))
+                        .addComponent(btLimpaVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtDescricao))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtQtd, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(143, 143, 143))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(btAddProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btRemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btSelecionaProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(36, 36, 36))
+                            .addComponent(btAddProduto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btRemoverProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -339,9 +341,9 @@ public class VendaView extends javax.swing.JFrame {
                     .addComponent(txtCod, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(txtQtd))
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btAddProduto, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -398,7 +400,7 @@ public class VendaView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(btCadastrarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btCadastrarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                .addComponent(btCadastrarProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -442,7 +444,7 @@ public class VendaView extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(txtCodCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtNomeCliente, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)))
+                        .addComponent(txtNomeCliente)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -509,7 +511,21 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btSelecionaProdutoActionPerformed
 
     private void btAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddProdutoActionPerformed
-        // TODO add your handling code here:
+
+        if (txtQuantidade.getText().isEmpty() || txtQuantidade.getText().equals("0")) {
+            quantidadeProduto = "1";
+        } else {
+            quantidadeProduto = txtQuantidade.getText();
+        }
+
+        valorTotal += produtoPassado.preco * Double.parseDouble(quantidadeProduto);
+
+        defaultTableModel.addRow(new Object[]{produtoPassado.id.toString(),
+            produtoPassado.descricao.toString(), produtoPassado.preco.toString(),
+            quantidadeProduto, produtoPassado.preco * Double.parseDouble(quantidadeProduto)});
+
+        txtTotalVenda.setText(valorTotal.toString());
+
     }//GEN-LAST:event_btAddProdutoActionPerformed
 
     private void txtCodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodActionPerformed
@@ -549,6 +565,11 @@ public class VendaView extends javax.swing.JFrame {
         if (clientePassado.id != null) {
             txtCodCliente.setText(clientePassado.id.toString());
             txtNomeCliente.setText(clientePassado.nome);
+        }
+
+        if (produtoPassado.id != null) {
+            txtCod.setText(produtoPassado.id.toString());
+            txtDescricao.setText(produtoPassado.descricao);
         }
 
     }//GEN-LAST:event_formWindowGainedFocus
@@ -614,7 +635,7 @@ public class VendaView extends javax.swing.JFrame {
     private javax.swing.JTextField txtDescontoVenda;
     private javax.swing.JTextField txtDescricao;
     private javax.swing.JTextField txtNomeCliente;
-    private javax.swing.JTextField txtQtd;
+    private java.awt.TextField txtQuantidade;
     private javax.swing.JTextField txtTotalVenda;
     // End of variables declaration//GEN-END:variables
 }
