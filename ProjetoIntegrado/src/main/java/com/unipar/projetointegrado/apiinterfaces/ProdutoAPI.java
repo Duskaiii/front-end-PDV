@@ -16,7 +16,7 @@ import retrofit2.http.POST;
  */
 public interface ProdutoAPI {
     
-    @GET("/produto/all")
+    @GET("/produtos/all")
     Call<List<Produto>> findAll();
     
 }

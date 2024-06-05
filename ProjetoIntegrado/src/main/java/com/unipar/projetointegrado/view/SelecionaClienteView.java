@@ -114,9 +114,11 @@ public class SelecionaClienteView extends javax.swing.JFrame {
         jLabel1.setText("Pesquisar:");
 
         jTextField3.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
 
         jButton1.setBackground(new java.awt.Color(204, 204, 204));
+        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
                 try {

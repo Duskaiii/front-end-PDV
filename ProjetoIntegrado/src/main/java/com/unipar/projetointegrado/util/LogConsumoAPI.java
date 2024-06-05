@@ -41,7 +41,7 @@ public class LogConsumoAPI {
                 out.close();
             }
         }catch(IOException e){
-            System.out.println("COULD NOT LOG!!");
+            System.out.println("Erro ao gerar o arquivo de registro LOG!!");
         }
 
 

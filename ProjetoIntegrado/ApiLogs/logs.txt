@@ -1,0 +1,259 @@
+Data: 2024-06-04 18:48:48
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:48:49
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:48:50
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:48:50
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:49:22
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:50:37
+ListAll Clientes
+Status: Erro na resposta: 
+**************************
+Data: 2024-06-04 18:52:32
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 18:52:51
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 18:52:54
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:11:46
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:11:49
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:11:53
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:12:13
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:12:15
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:13:28
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:13:32
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:13:46
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:13:55
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:17:02
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:17:04
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:17:08
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:17:50
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:18:38
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:18:41
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:18:45
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:23:00
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:27:41
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:28:01
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:28:07
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:29:50
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:30:54
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:32:13
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:32:37
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:32:51
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:33:17
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:35:01
+ListAll Produtos
+Status: Erro na resposta: {"errors":["No static resource produto/all."]}
+**************************
+Data: 2024-06-04 19:36:07
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:36:11
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:38:37
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:38:39
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:40:42
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:40:44
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:41:54
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 19:41:56
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:02:21
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:02:23
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:04:31
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:04:34
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:08:47
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:08:47
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:08:53
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 20:10:38
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:31:27
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:31:30
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:33:49
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:33:50
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:35:20
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:35:22
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:42:25
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 22:42:27
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 23:03:36
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 23:03:39
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 23:05:33
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-04 23:05:35
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-04 23:05:38
+ListAll Produtos
+Status: Sucesso

@@ -117,9 +117,16 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
         jLabel1.setText("Pesquisar:");
 
         jTextField3.setBackground(new java.awt.Color(204, 204, 204));
+        jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField3.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField3ActionPerformed(evt);
+            }
+        });
 
         btProcurar.setBackground(new java.awt.Color(204, 204, 204));
+        btProcurar.setForeground(new java.awt.Color(0, 0, 0));
         btProcurar.setIcon(new javax.swing.JLabel() {
             public javax.swing.Icon getIcon() {
                 try {
@@ -357,6 +364,10 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btProcurarMouseClicked
+
+    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField3ActionPerformed
 
     /**
      * @param args the command line arguments

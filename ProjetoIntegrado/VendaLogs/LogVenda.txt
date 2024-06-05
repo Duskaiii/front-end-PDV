@@ -1,0 +1,30 @@
+Data: 2024-06-04 22:31:34
+com.unipar.projetointegrado.util.PassarCliente@1a16904e
+10.0
+Status: Finalizada
+**************************
+Data: 2024-06-04 22:33:56
+João da Silva
+10.0
+Status: Finalizada
+**************************
+Data: 2024-06-04 22:35:24
+Cliente: João da Silva
+Valor Total: 5.0
+Status: Finalizada
+**************************
+Data: 2024-06-04 22:42:33
+Cliente: João da Silva
+Valor Total: 10.0
+**************************
+Data: 2024-06-04 22:42:55
+Cliente: João da Silva
+Valor Total: 10.0
+**************************
+Data: 2024-06-04 23:03:43
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-04 23:05:43
+Cliente: João da Silva
+Valor Total: 25.0
