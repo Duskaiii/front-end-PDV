@@ -4,26 +4,19 @@
  */
 package com.unipar.projetointegrado.view;
 
-import com.unipar.projetointegrado.apiinterfaces.ProdutoAPI;
-import com.unipar.projetointegrado.util.LogConsumoAPI;
+import com.unipar.projetointegrado.util.ModelosDasTabelas;
 import com.unipar.projetointegrado.util.PassarProduto;
 
-import java.io.IOException;
-import java.util.Date;
-import java.util.List;
 import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.RowFilter;
-import javax.swing.event.DocumentListener;
-import models.Produto;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -36,52 +29,56 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
      */
     TableRowSorter<DefaultTableModel> rowSorter = new TableRowSorter<>();
     PassarProduto passarProduto = new PassarProduto();
-    LogConsumoAPI logConsumoAPI = new LogConsumoAPI();
+    ModelosDasTabelas tableModels = new ModelosDasTabelas();
+
 
     public SelecionaProdutoView() {
         initComponents();
+        tbProdutos.setModel(tableModels.getTableModelProdutos());
+        tbProdutos.setDefaultEditor(Object.class, null);
+        adicionarPesquisador();
+
+        ScheduledExecutorService agendar = Executors.newScheduledThreadPool(1);
+        Runnable runnable = new Runnable() {public void run() {tbProdutos.setModel(tableModels.getTableModelProdutos());}};
+        agendar.scheduleAtFixedRate(runnable,0,5, TimeUnit.SECONDS);
+
         tbProdutos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+    }
 
-        ProdutoAPI produtoAPI = retrofit.create(ProdutoAPI.class);
+    private void adicionarPesquisador() {
+        TableRowSorter<TableModel> pesquisadorTabela = new TableRowSorter<>(tbProdutos.getModel());
+        tbProdutos.setRowSorter(pesquisadorTabela);
 
-        produtoAPI.findAll().enqueue(new Callback<List<Produto>>() {
+        jTextField3.getDocument().addDocumentListener(new DocumentListener(){
+
             @Override
-            public void onResponse(Call<List<Produto>> call, Response<List<Produto>> response) {
-                if (response.isSuccessful()) {
+            public void insertUpdate(DocumentEvent e) {
+                String text = jTextField3.getText();
 
-                    DefaultTableModel tableModel = new DefaultTableModel(new Object[]{"Id", "Descrição", "Preço", "Categoria"}, 0);
-                    List<Produto> produtos = response.body();
-                    SwingUtilities.invokeLater(() -> {
-                        for (Produto produto : produtos) {
-                            tableModel.addRow(new Object[]{produto.getId(), produto.getDescricao(), produto.getPreco(), produto.getCategoria()});
-                        }
-                        tbProdutos.setModel(tableModel);
-                    });
-                    try {
-                        logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Produtos", "Sucesso");
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                if (text.trim().length() == 0) {
+                    pesquisadorTabela.setRowFilter(null);
                 } else {
-                    System.err.println("Erro na resposta: " + response.errorBody());
-                    try {
-                        logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Produtos", "Erro na resposta: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
+                    pesquisadorTabela.setRowFilter(RowFilter.regexFilter("(?i)" + text));
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Produto>> call, Throwable t) {
-                t.printStackTrace();
-            }
-        });
+            public void removeUpdate(DocumentEvent e) {
+                String text = jTextField3.getText();
 
+                if (text.trim().length() == 0) {
+                    pesquisadorTabela.setRowFilter(null);
+                } else {
+                    pesquisadorTabela.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+        });
     }
 
     /**

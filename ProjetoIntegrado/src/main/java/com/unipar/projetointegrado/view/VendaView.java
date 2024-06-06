@@ -5,14 +5,17 @@
 package com.unipar.projetointegrado.view;
 
 import com.unipar.projetointegrado.apiinterfaces.VendaAPI;
+import com.unipar.projetointegrado.util.ModelosDasTabelas;
 import com.unipar.projetointegrado.util.LogVendas;
 import com.unipar.projetointegrado.util.PassarCliente;
 import com.unipar.projetointegrado.util.PassarProduto;
 import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
-import models.Cliente;
 import java.util.Date;
-import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -35,33 +38,23 @@ public class VendaView extends javax.swing.JFrame {
     PassarCliente clientePassado = new PassarCliente();
     PassarProduto produtoPassado = new PassarProduto();
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Valor unit", "Qtd", "Valor total"}, 0);
+    ModelosDasTabelas tbModels = new ModelosDasTabelas();
+
 
     public VendaView() {
         initComponents();
         tbProdutos.setModel(defaultTableModel);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:8080")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        tbProdutos.setDefaultEditor(Object.class, null);
 
-        VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
-
-        Call<Venda> call = vendaAPI.insert(venda);
-        call.enqueue(new Callback<Venda>(){
-            @Override
-            public void onResponse(Call<Venda> call, Response<Venda> response){
-            if(response.isSuccessful()){
-                System.out.println("Venda finalziada com Sucesso"+ response.body());
-            }else{
-                System.out.println("Falha na finalização da venda"+ response.message());
+        ScheduledExecutorService agendar = Executors.newScheduledThreadPool(1);
+        Runnable runnable = new Runnable() {
+            public void run() {
+                tbModels.atualizarTbClientes();
+                tbModels.atualizarTbProdutos();
             }
-        }
-            @Override
-            public void onFailure(Call<Venda> callm, Throwable t){
-                System.out.println("ERRO: "+t.getMessage());
-            }
-        });
+        };
+        agendar.scheduleAtFixedRate(runnable,0,5, TimeUnit.MINUTES);
 
     }
 
@@ -500,10 +493,10 @@ public class VendaView extends javax.swing.JFrame {
             quantidadeProduto, produtoPassado.preco * Double.parseDouble(quantidadeProduto)});
 
         txtTotalVenda.setText(valorTotal.toString());
-        
-        txtCod.setText(" ");
-        txtDescricao.setText(" ");
-        txtQuantidade.setText(" ");
+
+        txtCod.setText("");
+        txtDescricao.setText("");
+        txtQuantidade.setText("");
 
     }//GEN-LAST:event_btAddProdutoActionPerformed
 
@@ -550,6 +543,32 @@ public class VendaView extends javax.swing.JFrame {
         // TODO add your handling code here:
         LogVendas logVenda = new LogVendas();
 
+
+        tbProdutos.setModel(defaultTableModel);
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://localhost:8080")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
+
+        Call<Venda> call = vendaAPI.insert(venda);
+        call.enqueue(new Callback<Venda>(){
+            @Override
+            public void onResponse(Call<Venda> call, Response<Venda> response){
+                if(response.isSuccessful()){
+                    System.out.println("Venda finalziada com Sucesso"+ response.body());
+                }else{
+                    System.out.println("Falha na finalização da venda"+ response.message());
+                }
+            }
+            @Override
+            public void onFailure(Call<Venda> callm, Throwable t){
+                System.out.println("ERRO: "+t.getMessage());
+            }
+        });
+
         try {
             logVenda.regVenda(new Date().getTime(), txtNomeCliente.getText(), valorTotal.doubleValue());
         } catch (IOException msg) {
@@ -567,7 +586,7 @@ public class VendaView extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
