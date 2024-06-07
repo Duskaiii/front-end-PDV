@@ -4,7 +4,7 @@
  */
 package models;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -67,6 +67,11 @@ public class Venda {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
+    }
+
+    @Override
+    public String toString() {
+        return "Venda{" + "id=" + id + ", data=" + data + ", cliente=" + cliente + ", valorTotal=" + valorTotal + ", observacoes=" + observacoes + '}';
     }
     
     

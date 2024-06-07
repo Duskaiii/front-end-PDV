@@ -28,3 +28,31 @@ Valor Total: 5.0
 Data: 2024-06-04 23:05:43
 Cliente: João da Silva
 Valor Total: 25.0
+**************************
+Data: 2024-06-06 20:37:50
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:38:28
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:38:34
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:41:33
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:43:27
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:46:07
+Cliente: João da Silva
+Valor Total: 5.0
+**************************
+Data: 2024-06-06 20:46:42
+Cliente: João da Silva
+Valor Total: 5.0

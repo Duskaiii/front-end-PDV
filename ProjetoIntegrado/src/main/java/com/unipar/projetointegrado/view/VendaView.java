@@ -10,11 +10,16 @@ import com.unipar.projetointegrado.util.LogVendas;
 import com.unipar.projetointegrado.util.PassarCliente;
 import com.unipar.projetointegrado.util.PassarProduto;
 import java.io.IOException;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import javax.swing.table.DefaultTableModel;
-import java.util.Date;
+
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import models.Cliente;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -40,7 +45,6 @@ public class VendaView extends javax.swing.JFrame {
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Valor unit", "Qtd", "Valor total"}, 0);
     ModelosDasTabelas tbModels = new ModelosDasTabelas();
 
-
     public VendaView() {
         initComponents();
         tbProdutos.setModel(defaultTableModel);
@@ -54,7 +58,7 @@ public class VendaView extends javax.swing.JFrame {
                 tbModels.atualizarTbProdutos();
             }
         };
-        agendar.scheduleAtFixedRate(runnable,0,5, TimeUnit.MINUTES);
+        agendar.scheduleAtFixedRate(runnable, 0, 5, TimeUnit.MINUTES);
 
     }
 
@@ -393,6 +397,11 @@ public class VendaView extends javax.swing.JFrame {
         txtCodCliente.setForeground(new java.awt.Color(0, 0, 0));
         txtCodCliente.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtCodCliente.setEnabled(false);
+        txtCodCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCodClienteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -541,8 +550,6 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btFinalizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizaVendaActionPerformed
         // TODO add your handling code here:
-        LogVendas logVenda = new LogVendas();
-
 
         tbProdutos.setModel(defaultTableModel);
 
@@ -553,31 +560,41 @@ public class VendaView extends javax.swing.JFrame {
 
         VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
 
+        long millis = System.currentTimeMillis();
+
+        Date dataDeHoje = new Date(millis);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+        venda.setId(Long.parseLong("2"));
+        venda.setCliente(new Cliente(clientePassado.id, clientePassado.nome, clientePassado.cpf, clientePassado.email));
+        venda.setData(dataDeHoje);
+        venda.setValorTotal(valorTotal);
+        venda.setObservacoes("Venda Teste");
+
         Call<Venda> call = vendaAPI.insert(venda);
-        call.enqueue(new Callback<Venda>(){
+
+        call.enqueue(new Callback<Venda>() {
             @Override
-            public void onResponse(Call<Venda> call, Response<Venda> response){
-                if(response.isSuccessful()){
-                    System.out.println("Venda finalziada com Sucesso"+ response.body());
-                }else{
-                    System.out.println("Falha na finalização da venda"+ response.message());
+            public void onResponse(Call<Venda> call, Response<Venda> response) {
+                if (response.isSuccessful()) {
+                    System.out.println("Venda finalziada com Sucesso" + response.body());
+                } else {
+                    System.out.println("Falha na finalização da venda" + response.message() + venda.toString());
                 }
             }
+
             @Override
-            public void onFailure(Call<Venda> callm, Throwable t){
-                System.out.println("ERRO: "+t.getMessage());
+            public void onFailure(Call<Venda> call, Throwable t) {
+                System.out.println("ERRO: " + t.getMessage());
+
             }
         });
-
-        try {
-            logVenda.regVenda(new Date().getTime(), txtNomeCliente.getText(), valorTotal.doubleValue());
-        } catch (IOException msg) {
-            throw new RuntimeException(msg);
-
-        }
-
-
     }//GEN-LAST:event_btFinalizaVendaActionPerformed
+
+    private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCodClienteActionPerformed
 
     /**
      * @param args the command line arguments
