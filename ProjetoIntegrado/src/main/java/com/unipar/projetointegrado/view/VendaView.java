@@ -5,12 +5,10 @@
 package com.unipar.projetointegrado.view;
 
 import com.unipar.projetointegrado.apiinterfaces.VendaAPI;
-import com.unipar.projetointegrado.util.ModelosDasTabelas;
-import com.unipar.projetointegrado.util.LogVendas;
-import com.unipar.projetointegrado.util.PassarCliente;
-import com.unipar.projetointegrado.util.PassarProduto;
+import com.unipar.projetointegrado.util.*;
+
 import java.io.IOException;
-import java.sql.Date;
+import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -21,6 +19,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import models.Cliente;
 
+import models.Produto;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -42,6 +41,7 @@ public class VendaView extends javax.swing.JFrame {
     Venda venda = new Venda();
     PassarCliente clientePassado = new PassarCliente();
     PassarProduto produtoPassado = new PassarProduto();
+    PassarValorTotal valorPassado = new PassarValorTotal();
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Valor unit", "Qtd", "Valor total"}, 0);
     ModelosDasTabelas tbModels = new ModelosDasTabelas();
 
@@ -208,7 +208,7 @@ public class VendaView extends javax.swing.JFrame {
         btFinalizaVenda.setForeground(new java.awt.Color(255, 255, 255));
         btFinalizaVenda.setText("Finalizar venda");
         btFinalizaVenda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btFinalizaVenda.addActionListener(new java.awt.event.ActionListener() {
+        btFinalizaVenda.addActionListener(new java.awt.event.ActionListener(){
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btFinalizaVendaActionPerformed(evt);
             }
@@ -489,19 +489,31 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btAddProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAddProdutoActionPerformed
 
+        //Precisa pedir pro Igor passar essa regra de négocio pro BackEnd
         if (txtQuantidade.getText().isEmpty() || txtQuantidade.getText().equals("0")) {
             quantidadeProduto = "1";
         } else {
             quantidadeProduto = txtQuantidade.getText();
         }
 
-        valorTotal += produtoPassado.preco * Double.parseDouble(quantidadeProduto);
+
+
+        //valorTotal += produtoPassado.preco * Double.parseDouble(quantidadeProduto);
 
         defaultTableModel.addRow(new Object[]{produtoPassado.id.toString(),
             produtoPassado.descricao.toString(), produtoPassado.preco.toString(),
             quantidadeProduto, produtoPassado.preco * Double.parseDouble(quantidadeProduto)});
 
-        txtTotalVenda.setText(valorTotal.toString());
+
+
+
+        txtTotalVenda.setText(valorPassado.toString());
+
+        //txtTotalVenda.setText(valorTotal.toString());
+        
+        tbProdutos.setModel(defaultTableModel);
+        
+        
 
         txtCod.setText("");
         txtDescricao.setText("");
@@ -515,15 +527,19 @@ public class VendaView extends javax.swing.JFrame {
 
     private void btRemoverProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverProdutoActionPerformed
 
-        valorTotal = valorTotal - Double.parseDouble(tbProdutos.getValueAt(tbProdutos.getSelectedRow(), 4).toString());
+//        valorTotal = valorTotal - Double.parseDouble(tbProdutos.getValueAt(tbProdutos.getSelectedRow(), 4).toString());
 
         defaultTableModel.removeRow(tbProdutos.getSelectedRow());
 
-        txtTotalVenda.setText(valorTotal.toString());
+//        txtTotalVenda.setText(valorTotal.toString());
     }//GEN-LAST:event_btRemoverProdutoActionPerformed
 
     private void txtTotalVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVendaActionPerformed
         // TODO add your handling code here:
+        
+
+//        int quantidade = defaultTableModel.getValueAt(tbProdutos.getSelectedRow(), 4).toString();
+        
     }//GEN-LAST:event_txtTotalVendaActionPerformed
 
     private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
@@ -548,7 +564,7 @@ public class VendaView extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void btFinalizaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizaVendaActionPerformed
+    private void btFinalizaVendaActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
 
         tbProdutos.setModel(defaultTableModel);
@@ -560,15 +576,20 @@ public class VendaView extends javax.swing.JFrame {
 
         VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
 
-        long millis = System.currentTimeMillis();
+        Date date = new Date();
 
-        Date dataDeHoje = new Date(millis);
+        //Pega a data e converte para String + Molda no dataParaString
+        String dataNaoFormatada = dataParaString(date);
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        //Recebe a data em String e converte novamente para Date
+        Date dataFormatada = stringParaData(dataNaoFormatada);
+
 
         venda.setId(Long.parseLong("2"));
         venda.setCliente(new Cliente(clientePassado.id, clientePassado.nome, clientePassado.cpf, clientePassado.email));
-        venda.setData(dataDeHoje);
+
+        venda.setData(dataFormatada);
+
         venda.setValorTotal(valorTotal);
         venda.setObservacoes("Venda Teste");
 
@@ -590,15 +611,13 @@ public class VendaView extends javax.swing.JFrame {
 
             }
         });
-    }//GEN-LAST:event_btFinalizaVendaActionPerformed
+    }
 
-    private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodClienteActionPerformed
+    private void txtCodClienteActionPerformed(java.awt.event.ActionEvent evt) {                                              
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtCodClienteActionPerformed
+    }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -630,6 +649,26 @@ public class VendaView extends javax.swing.JFrame {
             }
         });
     }
+
+
+
+    //Vai passar a Data para String
+    public static String dataParaString(Date date) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        return formatter.format(date);
+    }
+
+    //Vai passar o String para data
+    public static Date stringParaData(String dateString) {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            return formatter.parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

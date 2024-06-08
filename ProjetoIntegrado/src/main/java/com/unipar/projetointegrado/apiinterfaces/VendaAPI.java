@@ -8,6 +8,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import models.Venda;
+import retrofit2.http.PUT;
 
 /**
  *
@@ -16,4 +17,7 @@ import models.Venda;
 public interface VendaAPI {
     @POST("/vendas")
     Call<Venda> insert(@Body Venda venda);
+    
+    @PUT("/calcular-total")
+    Call<Double> calcular(@Body Double valor);
 }
