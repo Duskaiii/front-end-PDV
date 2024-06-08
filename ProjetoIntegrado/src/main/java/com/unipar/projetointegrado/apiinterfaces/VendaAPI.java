@@ -4,11 +4,14 @@
  */
 package com.unipar.projetointegrado.apiinterfaces;
 
+import models.Produto;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import models.Venda;
 import retrofit2.http.PUT;
+
+import java.util.List;
 
 /**
  *
@@ -18,6 +21,6 @@ public interface VendaAPI {
     @POST("/vendas")
     Call<Venda> insert(@Body Venda venda);
     
-    @PUT("/calcular-total")
-    Call<Double> calcular(@Body Double valor);
+    @PUT("/vendas/calcular-total")
+    Call<Double> calcular(@Body List<Produto> produtoList);
 }

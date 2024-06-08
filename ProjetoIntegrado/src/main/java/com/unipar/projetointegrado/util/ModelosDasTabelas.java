@@ -49,19 +49,15 @@ public class ModelosDasTabelas {
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-                } else {
-                    System.err.println("Erro na resposta: " + response.errorBody());
-                    try {
-                        logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Produtos", "Erro na resposta: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                 }
             }
-
             @Override
             public void onFailure(Call<List<Produto>> call, Throwable t) {
-                t.printStackTrace();
+                try {
+                    logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Produtos", "Erro na resposta: " + t.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }
@@ -78,26 +74,20 @@ public class ModelosDasTabelas {
                             defaultModelCliente.addRow(new Object[]{cliente.getId(), cliente.getNome(), cliente.getEmail(), cliente.getCpf()});
                         }
                     });
-
-
                     try {
                         logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Clientes", "Sucesso");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
-
-                } else {
-                    try {
-                        logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Clientes", "Erro na resposta: " + response.errorBody().string());
-                    } catch (IOException e) {
-                        throw new RuntimeException(e);
-                    }
                 }
             }
-
             @Override
             public void onFailure(Call<List<Cliente>> call, Throwable t) {
-                t.printStackTrace();
+                try {
+                    logConsumoAPI.registrarConsumo(new Date().getTime(), "ListAll Clientes", "Erro na resposta: " + t.getMessage());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
     }

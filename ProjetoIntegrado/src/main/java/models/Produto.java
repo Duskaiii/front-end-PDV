@@ -56,7 +56,14 @@ public class Produto {
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Produto{" +
+                "id=" + id +
+                ", descricao='" + descricao + '\'' +
+                ", preco=" + preco +
+                ", categoria='" + categoria + '\'' +
+                '}';
+    }
 }

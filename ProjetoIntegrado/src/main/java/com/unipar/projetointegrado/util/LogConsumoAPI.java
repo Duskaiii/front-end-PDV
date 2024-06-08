@@ -27,7 +27,7 @@ public class LogConsumoAPI {
                 try (FileWriter escritor = new FileWriter("ApiLogs/logs.txt"); BufferedWriter buff = new BufferedWriter(escritor)) {
 
                     buff.write("Data: " + dataAtual + "\n");
-                    buff.write(tipoConsumo + "\n");
+                    buff.write("Operacao: " + tipoConsumo + "\n");
                     buff.write("Status: " + status + "\n");
 
 
