@@ -402,6 +402,7 @@ public class VendaView extends javax.swing.JFrame {
 
     private void atualizarPrecoTotal() {
         produtos.clear();
+        listParaCalcularTotal.clear();
 
         for (int i = 0; i < tbProdutos.getRowCount(); i++) {
             produtos.add(new Produto(Long.parseLong(tbProdutos.getValueAt(i, 0).toString()),
@@ -440,15 +441,16 @@ public class VendaView extends javax.swing.JFrame {
     }
 
     private void btLimpaVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimpaVendaActionPerformed
-        // TODO add your handling code here:
         defaultTableModel.setRowCount(0);
         txtNomeCliente.setText("");
-        txtNomeCliente.setText("");
+        txtCodCliente.setText("");
         txtCod.setText("");
         txtDescricao.setText("");
+        txtObservacao.setText("");
         spinnerQtd.setValue(1);
-
-        txtTotalVenda.setText("0");
+        clientePassado.resetCliente();
+        produtoPassado.resetProduto();
+        atualizarPrecoTotal();
     }//GEN-LAST:event_btLimpaVendaActionPerformed
 
     private void btSelecionaProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSelecionaProdutoActionPerformed
@@ -589,6 +591,17 @@ public class VendaView extends javax.swing.JFrame {
             });
 
         }
+
+        defaultTableModel.setRowCount(0);
+        txtNomeCliente.setText("");
+        txtCodCliente.setText("");
+        txtCod.setText("");
+        txtDescricao.setText("");
+        txtObservacao.setText("");
+        spinnerQtd.setValue(1);
+        clientePassado.resetCliente();
+        produtoPassado.resetProduto();
+        atualizarPrecoTotal();
 
     }
 
