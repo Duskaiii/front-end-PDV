@@ -7,7 +7,7 @@ package com.unipar.projetointegrado.apiinterfaces;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import models.VendaProduto;
+import models.ItemVenda;
 
 /**
  *
@@ -15,5 +15,5 @@ import models.VendaProduto;
  */
 public interface VendaProdutoAPI {
     @POST("/itens")
-    Call<VendaProduto> insert(@Body VendaProduto vendaProduto);
+    Call<ItemVenda> insert(@Body ItemVenda itemVenda);
 }
