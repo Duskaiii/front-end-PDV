@@ -4,6 +4,7 @@
  */
 package com.unipar.projetointegrado.apiinterfaces;
 
+import models.LoginResponseDTO;
 import retrofit2.Call;
 import retrofit2.http.POST;
 import models.CredenciaisLogin;
@@ -15,7 +16,8 @@ import retrofit2.http.Body;
  */
 public interface LoginAPI {
     @POST("/auth/login")
-    Call<String> login(@Body CredenciaisLogin credentials);
+    Call<LoginResponseDTO> login(@Body CredenciaisLogin credentials);
+
 }
 
 
