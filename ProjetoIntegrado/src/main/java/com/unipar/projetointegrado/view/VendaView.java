@@ -4,7 +4,6 @@
  */
 package com.unipar.projetointegrado.view;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.unipar.projetointegrado.apiinterfaces.ItemVendaAPI;
@@ -55,13 +54,16 @@ public class VendaView extends javax.swing.JFrame {
     LogConsumoAPI logConsumoAPI = new LogConsumoAPI();
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Categoria", "Valor unit", "Qtd", "Valor total"}, 0);
     ModelosDasTabelas tbModels = new ModelosDasTabelas();
+    
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd")
             .create();
+    
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://localhost:8080")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
+    
     VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
     ItemVendaAPI itemVendaAPI = retrofit.create(ItemVendaAPI.class);
 
@@ -402,8 +404,8 @@ public class VendaView extends javax.swing.JFrame {
         produtos.clear();
 
         for (int i = 0; i < tbProdutos.getRowCount(); i++) {
-            produtos.add(new Produto(Long.parseLong(tbProdutos.getValueAt(i, 0).toString())
-                    , tbProdutos.getValueAt(i, 1).toString(), Double.parseDouble(tbProdutos.getValueAt(i, 3).toString()),
+            produtos.add(new Produto(Long.parseLong(tbProdutos.getValueAt(i, 0).toString()),
+                     tbProdutos.getValueAt(i, 1).toString(), Double.parseDouble(tbProdutos.getValueAt(i, 3).toString()),
                     tbProdutos.getValueAt(i, 2).toString()));
         }
 
@@ -459,7 +461,7 @@ public class VendaView extends javax.swing.JFrame {
             quantidadeProduto = spinnerQtd.getValue().toString();
 
             defaultTableModel.addRow(new Object[]{produtoPassado.id.toString(),
-                produtoPassado.descricao.toString(),produtoPassado.categoria.toString(), produtoPassado.preco.toString(),
+                produtoPassado.descricao.toString(), produtoPassado.categoria.toString(), produtoPassado.preco.toString(),
                 quantidadeProduto, produtoPassado.preco * Double.parseDouble(quantidadeProduto)});
 
             tbProdutos.setModel(defaultTableModel);
@@ -517,8 +519,6 @@ public class VendaView extends javax.swing.JFrame {
                 = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
 
-
-
         System.out.println(date);
 
         venda.setCliente(new Cliente(clientePassado.id, clientePassado.nome, clientePassado.cpf, clientePassado.email));
@@ -541,7 +541,6 @@ public class VendaView extends javax.swing.JFrame {
                 }
             }
 
-
             @Override
             public void onFailure(Call<Venda> call, Throwable t) {
                 try {
@@ -554,12 +553,12 @@ public class VendaView extends javax.swing.JFrame {
 
     }
 
-    public void gerarItemVenda(Venda vendaResposta, java.sql.Date date){
+    public void gerarItemVenda(Venda vendaResposta, java.sql.Date date) {
 
         ItemVenda itemVenda = new ItemVenda();
         itemVenda.setVenda(vendaResposta);
 
-        for (int i = 0; i <produtos.size(); i++) {
+        for (int i = 0; i < produtos.size(); i++) {
             itemVenda.setProduto(produtos.get(i));
             itemVenda.setQuantidade(Integer.parseInt(tbProdutos.getValueAt(i, 4).toString()));
             itemVenda.setValorUnitario(produtos.get(i).getPreco());
