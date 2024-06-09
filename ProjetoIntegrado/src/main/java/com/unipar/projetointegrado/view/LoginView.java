@@ -7,8 +7,16 @@ package com.unipar.projetointegrado.view;
 import com.unipar.projetointegrado.apiinterfaces.LoginAPI;
 import com.unipar.projetointegrado.util.RetrofitClient;
 import models.CredenciaisLogin;
+import models.LoginResponseDTO;
+import okhttp3.Interceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
+
+import java.io.IOException;
 
 /**
  *
@@ -228,29 +236,43 @@ public class LoginView extends javax.swing.JFrame {
     }
 
     private void fazerLogin() {
-        String username = txtLogin.getText();
-        String password = new String(txtSenha.getPassword());
 
-        Retrofit retrofit = RetrofitClient.getRetrofitInstance();
-        LoginAPI authService = retrofit.create(LoginAPI.class);
-        Call<String> call = authService.login(new CredenciaisLogin(username, password));
+        LoginAPI loginAPI = RetrofitClient.getRetrofitInstance().create(LoginAPI.class);
 
-        call.enqueue(new retrofit2.Callback<String>() {
+        CredenciaisLogin credenciais = new CredenciaisLogin(txtLogin.getText(), new String(txtSenha.getPassword()));
+
+        Call<LoginResponseDTO> call = loginAPI.login(credenciais);
+        call.enqueue(new Callback<LoginResponseDTO>() {
             @Override
-            public void onResponse(Call<String> call, retrofit2.Response<String> response) {
+            public void onResponse(Call<LoginResponseDTO> call, Response<LoginResponseDTO> response) {
                 if (response.isSuccessful()) {
-                    String token = response.body();
-                    System.out.println("Login successful! Token: " + token);
+                    System.out.println("Login efetuado com sucesso");
+                    System.out.println("Token: " + response.body().getToken());
+                    String token = response.body().getToken();
+                    Interceptor inteceptor = new Interceptor() {
+                        @Override
+                        public okhttp3.Response intercept(Chain chain) throws IOException {
+                            Request original = chain.request();
+                            Request request = original.newBuilder()
+                                    .header("Authorization", "Bearer " + token)
+                                    .method(original.method(), original.body())
+                                    .build();
+                            return chain.proceed(request);
+                        }
+                    };
+                    OkHttpClient.Builder builder = new OkHttpClient.Builder();
+                    builder.addInterceptor(inteceptor);
                 } else {
-                    System.out.println("Login failed!");
+                    System.out.println("Erro ao efetuar login: " + response.message());
                 }
             }
 
             @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                System.out.println("Error: " + t.getMessage());
+            public void onFailure(Call<LoginResponseDTO> call, Throwable throwable) {
+                System.out.println("Erro ao efetuar login 2: " + throwable.getMessage());
             }
         });
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
