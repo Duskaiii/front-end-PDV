@@ -181,6 +181,10 @@ public class LoginView extends javax.swing.JFrame {
     private void btAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessoActionPerformed
         // TODO add your handling code here:
         fazerLogin();
+        
+        new VendaView().setVisible(true);
+        
+        this.dispose();
     }//GEN-LAST:event_btAcessoActionPerformed
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed

@@ -1,10 +1,8 @@
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\apiinterfaces\ProdutoAPI.java
-C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\Login.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\Venda.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\apiinterfaces\LoginAPI.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\view\SelecionaClienteView.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\apiinterfaces\ClienteAPI.java
-C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\UserCredentials.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\ProjetoIntegrado.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\util\LogConsumoAPI.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\ItemVenda.java
@@ -17,6 +15,7 @@ C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\view\VendaView.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\util\ModelosDasTabelas.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\util\PassarCliente.java
+C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\CredenciaisLogin.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\models\Produto.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\apiinterfaces\VendaAPI.java
 C:\Users\Dzkyy\Documents\front-end-PDV\ProjetoIntegrado\src\main\java\com\unipar\projetointegrado\util\LogVendas.java

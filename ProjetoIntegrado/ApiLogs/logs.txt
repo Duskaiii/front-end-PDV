@@ -70,3 +70,11 @@ Status: Sucesso
 Data: 2024-06-08 02:17:07
 ListAll Clientes
 Status: Sucesso
+**************************
+Data: 2024-06-09 13:57:37
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 13:57:37
+ListAll Produtos
+Status: Sucesso

@@ -3,13 +3,12 @@ com\unipar\projetointegrado\util\LogVendas.class
 com\unipar\projetointegrado\view\LoginView$3.class
 com\unipar\projetointegrado\view\LoginView.class
 com\unipar\projetointegrado\util\RetrofitClient.class
+models\CredenciaisLogin.class
 com\unipar\projetointegrado\view\LoginView$4.class
 com\unipar\projetointegrado\view\SelecionaProdutoView$8.class
 com\unipar\projetointegrado\apiinterfaces\VendaAPI.class
 com\unipar\projetointegrado\view\VendaView$15.class
-models\UserCredentials.class
 com\unipar\projetointegrado\view\LoginView$1.class
 com\unipar\projetointegrado\view\SelecionaClienteView$6.class
 com\unipar\projetointegrado\apiinterfaces\LoginAPI.class
-models\Login.class
 com\unipar\projetointegrado\view\LoginView$2.class
