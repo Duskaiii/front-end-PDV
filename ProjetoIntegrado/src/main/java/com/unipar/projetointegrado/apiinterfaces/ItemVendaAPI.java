@@ -13,7 +13,7 @@ import models.ItemVenda;
  *
  * @author Dzkyy
  */
-public interface VendaProdutoAPI {
+public interface ItemVendaAPI {
     @POST("/itens")
     Call<ItemVenda> insert(@Body ItemVenda itemVenda);
 }

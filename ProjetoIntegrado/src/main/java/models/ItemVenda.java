@@ -8,7 +8,7 @@ package models;
  *
  * @author rafae
  */
-public class VendaProduto {
+public class ItemVenda {
     
     private Long id;
     private int quantidade;
@@ -17,10 +17,10 @@ public class VendaProduto {
     private Venda venda;
     private Produto produto;
 
-    public VendaProduto() {
+    public ItemVenda() {
     }
 
-    public VendaProduto(Long id, int quantidade, Double valorUnitario, Double valorTotal, Venda venda, Produto produto) {
+    public ItemVenda(Long id, int quantidade, Double valorUnitario, Double valorTotal, Venda venda, Produto produto) {
         this.id = id;
         this.quantidade = quantidade;
         this.valorUnitario = valorUnitario;
