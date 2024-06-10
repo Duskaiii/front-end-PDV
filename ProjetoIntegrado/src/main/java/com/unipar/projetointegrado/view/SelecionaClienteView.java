@@ -32,8 +32,6 @@ public class SelecionaClienteView extends javax.swing.JFrame {
 
     public SelecionaClienteView() {
         initComponents();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         tbClientes.setModel(tableModels.getTableModelClientes());
         tbClientes.setDefaultEditor(Object.class, null);
         adicionarPesquisador();

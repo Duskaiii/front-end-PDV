@@ -34,8 +34,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
 
     public SelecionaProdutoView() {
         initComponents();
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+
         tbProdutos.setModel(tableModels.getTableModelProdutos());
         tbProdutos.setDefaultEditor(Object.class, null);
         adicionarPesquisador();

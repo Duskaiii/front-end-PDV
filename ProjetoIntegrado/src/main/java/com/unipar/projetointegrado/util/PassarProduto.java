@@ -10,11 +10,5 @@ public class PassarProduto {
     public static String descricao;
     public static Double preco;
     public static String categoria;
-
-    public void resetProduto(){
-        id = null;
-        descricao = "";
-        preco = null;
-        categoria = "";
-    }
+    
 }

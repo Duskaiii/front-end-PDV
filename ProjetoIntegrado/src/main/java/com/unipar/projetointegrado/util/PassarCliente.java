@@ -14,12 +14,5 @@ public class PassarCliente {
     public static String nome;
     public static String email;
     public static String cpf;
-
-    public void resetCliente(){
-        id = null;
-        nome = null;
-        email = null;
-        cpf = null;
-    }
     
 }
