@@ -54,18 +54,9 @@ public class VendaView extends javax.swing.JFrame {
     LogConsumoAPI logConsumoAPI = new LogConsumoAPI();
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Categoria", "Valor unit", "Qtd", "Valor total"}, 0);
     ModelosDasTabelas tbModels = new ModelosDasTabelas();
-    
-    Gson gson = new GsonBuilder()
-            .setDateFormat("yyyy-MM-dd")
-            .create();
-    
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://localhost:8080")
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .build();
-    
-    VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
-    ItemVendaAPI itemVendaAPI = retrofit.create(ItemVendaAPI.class);
+
+    VendaAPI vendaAPI = RetrofitClient.getRetrofitInstance().create(VendaAPI.class);
+    ItemVendaAPI itemVendaAPI = RetrofitClient.getRetrofitInstance().create(ItemVendaAPI.class);
 
     public VendaView() {
         initComponents();
@@ -515,8 +506,6 @@ public class VendaView extends javax.swing.JFrame {
     }//GEN-LAST:event_btSelecionaClienteActionPerformed
 
     private void btFinalizaVendaActionPerformed(java.awt.event.ActionEvent evt) {
-        SimpleDateFormat df
-                = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         java.sql.Date date = new java.sql.Date(System.currentTimeMillis());
 
         System.out.println(date);
@@ -525,7 +514,7 @@ public class VendaView extends javax.swing.JFrame {
         venda.setValorTotal(Double.parseDouble(txtTotalVenda.getText()));
         venda.setData(date);
         venda.setObservacoes(txtObservacao.getText());
-
+        System.out.println(venda);
         Call<Venda> call = vendaAPI.insert(venda);
 
         call.enqueue(new Callback<Venda>() {

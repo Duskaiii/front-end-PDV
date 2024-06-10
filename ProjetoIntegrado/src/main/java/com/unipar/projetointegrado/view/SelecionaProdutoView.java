@@ -34,6 +34,7 @@ public class SelecionaProdutoView extends javax.swing.JFrame {
 
     public SelecionaProdutoView() {
         initComponents();
+
         tbProdutos.setModel(tableModels.getTableModelProdutos());
         tbProdutos.setDefaultEditor(Object.class, null);
         adicionarPesquisador();

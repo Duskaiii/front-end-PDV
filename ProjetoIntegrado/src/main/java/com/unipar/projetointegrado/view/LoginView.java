@@ -5,9 +5,11 @@
 package com.unipar.projetointegrado.view;
 
 import com.unipar.projetointegrado.apiinterfaces.LoginAPI;
+import com.unipar.projetointegrado.apiinterfaces.LoginCallBack;
 import com.unipar.projetointegrado.util.RetrofitClient;
 import models.CredenciaisLogin;
 import models.LoginResponseDTO;
+import models.TokenManager;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -188,11 +191,24 @@ public class LoginView extends javax.swing.JFrame {
 
     private void btAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAcessoActionPerformed
         // TODO add your handling code here:
-        fazerLogin();
-        
-        new VendaView().setVisible(true);
-        
-        this.dispose();
+        if (txtLogin.getText().isEmpty() || txtSenha.getPassword().length == 0) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos");
+            return;
+        }
+
+        fazerLogin(new LoginCallBack() {
+            @Override
+            public void onLoginSuccess() {
+                new VendaView().setVisible(true);
+                dispose();
+            }
+
+            @Override
+            public void onLoginFailure(String message) {
+                JOptionPane.showMessageDialog(null, message);
+            }
+        });
+
     }//GEN-LAST:event_btAcessoActionPerformed
 
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
@@ -235,7 +251,7 @@ public class LoginView extends javax.swing.JFrame {
         });
     }
 
-    private void fazerLogin() {
+    private void fazerLogin(LoginCallBack callBack) {
 
         LoginAPI loginAPI = RetrofitClient.getRetrofitInstance().create(LoginAPI.class);
 
@@ -248,31 +264,25 @@ public class LoginView extends javax.swing.JFrame {
                 if (response.isSuccessful()) {
                     System.out.println("Login efetuado com sucesso");
                     System.out.println("Token: " + response.body().getToken());
-                    String token = response.body().getToken();
-                    Interceptor inteceptor = new Interceptor() {
-                        @Override
-                        public okhttp3.Response intercept(Chain chain) throws IOException {
-                            Request original = chain.request();
-                            Request request = original.newBuilder()
-                                    .header("Authorization", "Bearer " + token)
-                                    .method(original.method(), original.body())
-                                    .build();
-                            return chain.proceed(request);
-                        }
-                    };
-                    OkHttpClient.Builder builder = new OkHttpClient.Builder();
-                    builder.addInterceptor(inteceptor);
+                    TokenManager.getInstance().setAuthToken(response.body().getToken());
+                    RetrofitClient.setToken(response.body().getToken());
+                    callBack.onLoginSuccess();
                 } else {
-                    System.out.println("Erro ao efetuar login: " + response.message());
+                    try {
+                        String errorMessage = response.errorBody().string();
+                        callBack.onLoginFailure("Usuário ou senha inválidos");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        callBack.onLoginFailure("Erro ao processar a resposta da API");
+                    }
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponseDTO> call, Throwable throwable) {
-                System.out.println("Erro ao efetuar login 2: " + throwable.getMessage());
+                callBack.onLoginFailure("Erro ao efetuar login: " + throwable.getMessage());
             }
         });
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
