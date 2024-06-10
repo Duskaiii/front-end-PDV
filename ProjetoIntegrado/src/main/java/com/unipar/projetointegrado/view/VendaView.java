@@ -54,21 +54,23 @@ public class VendaView extends javax.swing.JFrame {
     LogConsumoAPI logConsumoAPI = new LogConsumoAPI();
     DefaultTableModel defaultTableModel = new DefaultTableModel(new Object[]{"Cod", "Descrição", "Categoria", "Valor unit", "Qtd", "Valor total"}, 0);
     ModelosDasTabelas tbModels = new ModelosDasTabelas();
-    
+
     Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd")
             .create();
-    
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://localhost:8080")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build();
-    
+
     VendaAPI vendaAPI = retrofit.create(VendaAPI.class);
     ItemVendaAPI itemVendaAPI = retrofit.create(ItemVendaAPI.class);
 
     public VendaView() {
         initComponents();
+        setLocationRelativeTo(null);
+
         ((JSpinner.DefaultEditor) spinnerQtd.getEditor()).getTextField().setEditable(false);
         tbProdutos.setModel(defaultTableModel);
         tbProdutos.getModel().addTableModelListener(new TableModelListener() {
@@ -161,7 +163,7 @@ public class VendaView extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -198,7 +200,7 @@ public class VendaView extends javax.swing.JFrame {
         txtTotalVenda.setText("0,00");
         txtTotalVenda.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
         txtTotalVenda.setEnabled(false);
-        
+
 
         jLabel1.setBackground(javax.swing.UIManager.getDefaults().getColor("Button.background"));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -211,6 +213,7 @@ public class VendaView extends javax.swing.JFrame {
         txtCod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtCod.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtCod.setEnabled(false);
+
 
         txtDescricao.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtDescricao.setForeground(new java.awt.Color(255, 255, 255));
@@ -365,11 +368,11 @@ public class VendaView extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtTotalVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtObservacao, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btFinalizaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btLimpaVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -405,7 +408,7 @@ public class VendaView extends javax.swing.JFrame {
 
         for (int i = 0; i < tbProdutos.getRowCount(); i++) {
             produtos.add(new Produto(Long.parseLong(tbProdutos.getValueAt(i, 0).toString()),
-                     tbProdutos.getValueAt(i, 1).toString(), Double.parseDouble(tbProdutos.getValueAt(i, 3).toString()),
+                    tbProdutos.getValueAt(i, 1).toString(), Double.parseDouble(tbProdutos.getValueAt(i, 3).toString()),
                     tbProdutos.getValueAt(i, 2).toString()));
         }
 
@@ -535,6 +538,7 @@ public class VendaView extends javax.swing.JFrame {
                 if (response.isSuccessful()) {
                     try {
                         logConsumoAPI.registrarConsumo(date.getTime(), "Insert Venda", "Sucesso");
+                        JOptionPane.showInputDialog(null, "Venda finalizada com sucesso !!");
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -545,6 +549,7 @@ public class VendaView extends javax.swing.JFrame {
             public void onFailure(Call<Venda> call, Throwable t) {
                 try {
                     logConsumoAPI.registrarConsumo(date.getTime(), "Insert Venda", "Erro na resposta: " + t.toString());
+                    JOptionPane.showInputDialog(null, "Ocorreram erros ao gravar a venda!");
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }

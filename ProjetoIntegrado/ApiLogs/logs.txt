@@ -78,3 +78,19 @@ Status: Sucesso
 Data: 2024-06-09 13:57:37
 ListAll Produtos
 Status: Sucesso
+**************************
+Data: 2024-06-09 20:28:36
+ListAll Clientes
+Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
+**************************
+Data: 2024-06-09 20:28:36
+ListAll Produtos
+Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
+**************************
+Data: 2024-06-09 21:38:49
+ListAll Clientes
+Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
+**************************
+Data: 2024-06-09 21:38:49
+ListAll Produtos
+Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
