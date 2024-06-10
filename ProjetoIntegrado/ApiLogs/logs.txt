@@ -86,3 +86,235 @@ Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
 Data: 2024-06-09 18:29:22
 ListAll Produtos
 Status: Erro na resposta: Failed to connect to localhost/[0:0:0:0:0:0:0:1]:8080
+**************************
+Data: 2024-06-09 19:56:58
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 19:56:58
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 19:58:14
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 19:58:14
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:31:44
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:31:44
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:33:24
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:33:24
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:38:19
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:38:19
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:38:52
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:38:52
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:38:57
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:39:01
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:39:04
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:39:12
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:17
+Insert Venda
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:17
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:17
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:17
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:17
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:52
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 20:43:52
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:01:21
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:01:21
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:01:39
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:01:39
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:08:34
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:08:34
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:13:33
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:13:33
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:13:49
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:13:49
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:20
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:20
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:27
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:27
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:48
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:48
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:14:55
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:15:11
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:15:11
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:15:16
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:15:19
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:15:26
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:18:56
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:18:56
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:19:01
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:19:05
+Atualizar Valor Total
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:19:08
+Insert Venda
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:19:08
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:19:08
+Insert ItemVenda
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:31:15
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 21:31:15
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 22:14:21
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 22:14:21
+ListAll Produtos
+Status: Sucesso
+**************************
+Data: 2024-06-09 22:44:41
+ListAll Clientes
+Status: Sucesso
+**************************
+Data: 2024-06-09 22:44:41
+ListAll Produtos
+Status: Sucesso

@@ -4,6 +4,7 @@ import com.unipar.projetointegrado.apiinterfaces.ClienteAPI;
 import com.unipar.projetointegrado.apiinterfaces.ProdutoAPI;
 import models.Cliente;
 import models.Produto;
+import models.TokenManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -21,13 +22,9 @@ public class ModelosDasTabelas {
 
 
     LogConsumoAPI logConsumoAPI = new LogConsumoAPI();
-    Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("http://localhost:8080")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
 
-    ClienteAPI clienteAPI = retrofit.create(ClienteAPI.class);
-    ProdutoAPI produtoAPI = retrofit.create(ProdutoAPI.class);
+    ClienteAPI clienteAPI = RetrofitClient.getRetrofitInstance().create(ClienteAPI.class);
+    ProdutoAPI produtoAPI = RetrofitClient.getRetrofitInstance().create(ProdutoAPI.class);
     static DefaultTableModel defaultModelCliente = new DefaultTableModel();
     static DefaultTableModel defaultModelProduto = new DefaultTableModel();
 
