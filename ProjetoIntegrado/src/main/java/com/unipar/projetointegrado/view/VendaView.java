@@ -69,7 +69,8 @@ public class VendaView extends javax.swing.JFrame {
 
     public VendaView() {
         initComponents();
-        ((JSpinner.DefaultEditor) spinnerQtd.getEditor()).getTextField().setEditable(false);
+        setLocationRelativeTo(null);
+        ((JSpinner.DefaultEditor) spinnerQtd.getEditor()).getTextField().setEditable(true);
         tbProdutos.setModel(defaultTableModel);
         tbProdutos.getModel().addTableModelListener(new TableModelListener() {
             @Override
